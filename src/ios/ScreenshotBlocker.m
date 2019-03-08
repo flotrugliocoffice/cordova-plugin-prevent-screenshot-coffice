@@ -1,5 +1,4 @@
-
-
+#import "ScreenshotBlocker.h"
 @implementation ScreenshotBlocker
 
 - (void)pluginInitialize {
@@ -22,11 +21,11 @@
 
 -(void)setupView {
     if ([[ScreenRecordingDetector sharedInstance] isRecording]) {
-        _mainView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.7];
-        _recordingStatusLabel.text = @"Recording status: YES";
+        [self webView].hidden = YES;
+        NSLog(@"Registro o prendo screenshots");
     } else {
-        _mainView.backgroundColor = [UIColor yellowColor];
-        _recordingStatusLabel.text = @"Recording status: NO";
+        [self webView].hidden = NO;
+        NSLog(@"Non registro");
 
     }
 }
@@ -39,10 +38,6 @@
 }
 -(void)screenCaptureStatusChanged {
     [self setupView];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
