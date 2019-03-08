@@ -1,29 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         id="cordova-plugin-prevent-screenshot-coffice"
         version="1.0.0">
 
-    <name>Cordova Screenshot blocker ios and android</name>
-
-    <engines>
-        <engine name="cordova" version=">=3.0.0"/>
-    </engines>
+    <name>cordova-plugin-prevent-screenshot-coffice</name>
+    <description>Cordova plugin for prevent screenCapture</description>
+    <license>MIT</license>
+    <keywords>cordova</keywords>
+    <repo>https://github.com/flotrugliocoffice/cordova-plugin-prevent-screenshot-coffice</repo>
+    <issue>https://github.com/flotrugliocoffice/cordova-plugin-prevent-screenshot-coffice/issues</issue>
 
     <js-module src="www/screenshot.js" name="screenshot">
-        <clobbers target="window.plugins.preventscreenshot" />
+        <clobbers target="window.plugins.preventscreenshot"/>
     </js-module>
+
+    <engines>
+        <engine name="cordova" version=">=7.1.0"/>
+        <engine name="cordova-android" version=">=7.0.0"/>
+        <engine name="cordova-ios" version=">=4.3.0"/>
+    </engines>
 
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="screenshotName">
                 <param name="android-package" value="com.coffice.ScreenshotBlocker"/>
-				<param name="onload" value="true" />
+                <param name="onload" value="true"/>
             </feature>
         </config-file>
 
         <source-file src="src/android/com/coffice/ScreenshotBlocker.java" target-dir="src/com/coffice"/>
     </platform>
-    <platform name="ios">
 
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="screenshotName">
+                <param name="ios-package" value="ScreenshotBlocker"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/ScreenshotBlocker.h"/>
+        <source-file src="src/ios/ScreenshotBlocker.m"/>
     </platform>
+
 </plugin>
