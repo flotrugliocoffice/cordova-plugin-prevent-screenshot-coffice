@@ -1,0 +1,15 @@
+{
+  "_from": "cordova-plugin-prevent-screenshot-coffice",
+  "_id": "cordova-plugin-prevent-screenshot-coffice@1.0.0",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "cordova-plugin-prevent-screenshot-coffice",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

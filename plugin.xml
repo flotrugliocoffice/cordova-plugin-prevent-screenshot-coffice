@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="cordova-plugin-prevent-screenshot-coffice"
+        version="1.0.0">
+
+    <name>Cordova Screenshot blocker ios and android</name>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+
+    <js-module src="www/screenshot.js" name="screenshot">
+        <clobbers target="window.plugins.preventscreenshot" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="screenshotName">
+                <param name="android-package" value="com.coffice.ScreenshotBlocker"/>
+				<param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/com/coffice/ScreenshotBlocker.java" target-dir="src/com/coffice"/>
+    </platform>
+    <platform name="ios">
+
+    </platform>
+</plugin>
