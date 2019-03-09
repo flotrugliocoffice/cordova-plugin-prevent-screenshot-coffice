@@ -4,5 +4,6 @@
 
 @interface ScreenshotBlocker : CDVPlugin
 
+- (void)enable:(CDVInvokedUrlCommand*)command;
 
 @end
