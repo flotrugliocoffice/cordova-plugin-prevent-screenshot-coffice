@@ -1,7 +1,11 @@
 #import "ScreenshotBlocker.h"
+@interface ScreenshotBlocker() {
+    CDVInvokedUrlCommand * _eventCommand;
+}
+@end
 
 @implementation ScreenshotBlocker
-    UIImageView* cover;
+UIImageView* cover;
 - (void)pluginInitialize {
     NSLog(@"Starting ScreenshotBlocker plugin");
 
@@ -13,12 +17,16 @@
                                             selector:@selector(applicationWillResignActive)
                                                 name:UIApplicationWillResignActiveNotification
                                               object:nil];
-    /*
-     [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(screenCaptureStatusChanged)
-                                                name:UIApplicationUserDidTakeScreenshotNotification
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tookScreeshot)
+                                                 name:UIApplicationUserDidTakeScreenshotNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(goingBackground)
+                                                name:UIApplicationWillResignActiveNotification
                                               object:nil];
-    */
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(screenCaptureStatusChanged)
                                                  name:kScreenRecordingDetectorRecordingStatusChangedNotification
@@ -26,7 +34,7 @@
 
     /*
      userDidTakeScreenshotNotification
-    */
+     */
 
 }
 
@@ -35,24 +43,44 @@
     CDVPluginResult* pluginResult = nil;
     NSLog(@"Abilita observers");
     /*
-    [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(appDidBecomeActive)
-                                                name:UIApplicationDidBecomeActiveNotification
-                                              object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(applicationWillResignActive)
-                                                name:UIApplicationWillResignActiveNotification
-                                              object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(screenCaptureStatusChanged)
-                                                 name:kScreenRecordingDetectorRecordingStatusChangedNotification
-                                               object:nil];
-
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    */
+     [[NSNotificationCenter defaultCenter]addObserver:self
+     selector:@selector(appDidBecomeActive)
+     name:UIApplicationDidBecomeActiveNotification
+     object:nil];
+     [[NSNotificationCenter defaultCenter]addObserver:self
+     selector:@selector(applicationWillResignActive)
+     name:UIApplicationWillResignActiveNotification
+     object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(screenCaptureStatusChanged)
+     name:kScreenRecordingDetectorRecordingStatusChangedNotification
+     object:nil];
+     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+     */
+}
+-(void)listen:(CDVInvokedUrlCommand*)command {
+    _eventCommand = command;
 }
 
+
+-(void) goingBackground {
+    NSLog(@"Me la scattion in bck");
+    if(_eventCommand!=nil) {
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"background"];
+        [pluginResult setKeepCallbackAsBool:YES];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:_eventCommand.callbackId];
+    }
+}
+-(void)tookScreeshot {
+    NSLog(@"fatta la foto?");
+    if(_eventCommand!=nil) {
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"tookScreenshot"];
+        [pluginResult setKeepCallbackAsBool:YES];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:_eventCommand.callbackId];
+    }
+
+}
 
 -(void)setupView {
     BOOL isCaptured = [[UIScreen mainScreen] isCaptured];

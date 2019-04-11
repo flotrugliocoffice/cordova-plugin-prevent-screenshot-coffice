@@ -35,7 +35,19 @@ function successCallback(result) {
 function errorCallback(error) {
   console.log(error);
 }
+
+
+document.addEventListener("onTookScreenshot",function(){
+// Receive notification when screenshot is ready;
+});
+
+document.addEventListener("onGoingBackground",function(){
+// Receive notification when control center or app going in background.
+});
+
 ```
+
+
 
 ## Usage in typescript
 

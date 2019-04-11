@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-prevent-screenshot-coffice",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cordova plugin for prevent screenCapture",
   "cordova": {
     "id": "cordova-plugin-prevent-screenshot-coffice",
