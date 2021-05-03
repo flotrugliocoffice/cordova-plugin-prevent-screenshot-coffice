@@ -1,7 +1,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="cordova-plugin-prevent-screenshot-coffice"
-        version="1.0.1">
+        version="1.0.2">
 
     <name>cordova-plugin-prevent-screenshot-coffice</name>
     <description>Cordova plugin for prevent screenCapture</description>
