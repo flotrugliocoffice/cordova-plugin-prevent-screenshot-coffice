@@ -34,6 +34,9 @@ NSString *kScreenRecordingDetectorRecordingStatusChangedNotification = @"kScreen
     return self;
 }
 - (BOOL)isRecording {
+    #if TARGET_IPHONE_SIMULATOR
+        return NO;
+    #endif
     for (UIScreen *screen in UIScreen.screens) {
         if ([screen respondsToSelector:@selector(isCaptured)]) {
             // iOS 11+ has isCaptured method.
